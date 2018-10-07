@@ -1,0 +1,86 @@
+<section ng-controller="WeatherController">
+
+
+    <i class="back fa fa-chevron-circle-left" ng-hide="panel === 0" ng-click="panel = 0"></i>
+
+    <!--Affiche un caroussel lors du chargement des resultats-->
+    <div class="loader" ng-show="loader"></div>
+
+
+    <section class="container-fluid panel panel-padding" ng-class="{center: panel === 0, left: panel > 0}">
+	<div class="description">
+	    <p>Application de météo, réalisée sous Angular Js</p>
+	</div>
+
+        <!--Formulaire de recherche (Lance la fonction search() )-->
+	<form class="form-group chooseCity" ng-submit="search()">
+
+	    <div class="form-group">
+		<label for="city">Choisir une Ville</label>
+		<input  class="form-control input-lg" id="city" type='text' placeholder="Rechercher une Ville" ng-model="city"/>
+	    </div>
+	    <button class="btn btn-default btn-lg pull-left" type="submit" value="Localiser" ng-click="geolocate()">Localiser</button>
+	    <button class="localBtn btn btn-default btn-lg pull-right" type="submit" value="Rechercher">Rechercher</button>
+	</form>
+    </section>
+
+    <section class="panel panel-padding right" ng-class="{center: panel === 1, right: panel < 1}">
+	<!--Affichage des infos météo-->
+        <div class="cityName">
+            {{weather.city.name}} / {{weather.city.country}}
+        </div>
+
+        <div class="row infosVille" ng-class="{row_active: $index === 0}" ng-click="expand($event)" ng-repeat="t in weather.list">
+
+	    <i class="icons wi wi-owm-{{t.weather[0].id}}"></i>
+
+            <div class="infoR">
+		<div class="date">
+		    <strong>{{t.dt * 1000| date:'EEE'}}</strong>
+		    {{t.dt * 1000| date:'dd/MM'}}
+		</div>
+		<div class="temperature">{{Math.round(t.temp.day)}}°C</div>
+		<div class="weatherDescript"><em>{{(t.weather[0].description)}}</em></div>
+	    </div>
+	    <!--	    Expand infos-->
+	    <div class="expended" ng-show="true">
+
+		<div class="complement">
+		    <div>
+			<i style="font-size: 2.8em;" class="wi wi-celsius"></i>
+		    </div>
+		    <div>
+			<em>Min. </em><strong>{{Math.round(t.temp.min)}}</strong><em> °C</em><br/>
+			<em>Max. </em><strong>{{Math.round(t.temp.max)}}</strong><em> °C</em>
+		    </div>
+		</div>
+
+		<div class="complement">
+		    <div>
+			<i class="wi wi-humidity"></i>
+		    </div>
+		    <div>
+			<em>Humidité</em><br/>
+			<strong>{{t.humidity}}</strong><em> %</em>
+		    </div>
+		</div>
+
+		<div class="complement">
+
+		    <div>
+			<i class="wi wi-windy"></i>
+		    </div>
+
+		    <div>
+			<em>Vent</em><br/>
+			<strong>{{t.speed}}</strong><em> Km/h</em>
+		    </div>
+
+		</div>
+
+	    </div>
+
+        </div>
+    </section>
+
+</section>

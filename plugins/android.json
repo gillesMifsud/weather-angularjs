@@ -1,0 +1,21 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "fr.yin.weather"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "fr.yin.weather"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "fr.yin.weather"
+        }
+    },
+    "dependent_plugins": {}
+}
